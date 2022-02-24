@@ -14,7 +14,7 @@ import {
 
 function App() {
   // Defining the mode 
-  const [mode, setMode] = useState('light')
+  const [mode, setMode] = useState('white')
 
     // Defining the default alert state to show alert to the user first value be null and it will be handle on the alert.js
   const [alert, setAlert] = useState(null)
@@ -30,31 +30,50 @@ function App() {
       setAlert(null)
     }, 2000);
   }
-
-  // Defining the showmode function to manuplate the dark and light mode and pass to the components
-  const showMode = () => {
-    if (mode === 'light') {
-      // Changing the mode state to dark
-      setMode('dark')
-      document.body.style.backgroundColor = '#000000'
+   
+   const removeClasses = ()=>{
+     document.body.classList.remove('bg-dark')
+     document.body.classList.remove('bg-light')
+     document.body.classList.remove('bg-warning')
+     document.body.classList.remove('bg-danger')
+     document.body.classList.remove('bg-light')
+   }
+  // Defining the showmode function to manuplate the dark,light and other modes and pass to the components
+  const showMode = (cls) => {
+    removeClasses()
+    setMode(cls)
+    document.body.classList.add('bg-'+cls)
+    if(cls==='dark'){
+      // document.body.style.backgroundColor = 'black'
       document.body.style.color = 'white'
-      showAlert('Dark mode has been enabled', 'success')
-      // document.title = 'TextUtils-DarkMode'
     }
     else {
-      // Changing the mode state to dark
-      setMode('light')
-      document.body.style.backgroundColor = 'white'
-      document.body.style.color = 'black'
-      showAlert('Light mode has been enabled', 'success')
-      // document.title = 'TextUtils-LightMode'
+      document.body.style.color ='black'
     }
+    // else if(cls==='warning'){
+    //   setMode('warning')
+    //   document.body.style.backgroundColor = '#ffa500'
+    //   document.body.style.color = 'black'
+    // }
+    // else if(cls==='danger'){
+    //   setMode('danger')
+    //   document.body.style.backgroundColor = 'red'
+    //   document.body.style.color = 'black'
+    // }
+    // else if(cls==='light'){
+    //   setMode('light')
+    //   document.body.style.backgroundColor = 'white'
+    //   document.body.style.color = 'black'
+    // }
+      // document.title = 'TextUtils-DarkMode'
   }
+
+  
 
   return (
     // You must be wrap the routes and the route in the Router tag
     <Router>
-      <Navbar title="TextUtils" about="About Us" contact="Contact Us" mode={mode} showMode={showMode} />
+      <Navbar title="TextUtils" about="About Us" contact="Contact Us" mode={mode} showMode={showMode}/>
       <Alert alert={alert} />
       <Routes>
       {/* exact means the url path match to the exact path */}

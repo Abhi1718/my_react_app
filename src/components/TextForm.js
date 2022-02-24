@@ -18,7 +18,6 @@ export default function TextForm(props) {
         const newText = text.toLowerCase()
         nextText(newText)
         props.showAlert('Successufully converted to lowercase','success')
-        // console.log("Clicked on the onclick handler")
         // nextText("You have been clicked on onClickHandler")
     }
 
@@ -34,18 +33,25 @@ export default function TextForm(props) {
         nextText('')
     }
 
+    // This function is used to copy the textarea value or text
+    const onCopyText = ()=>{
+       navigator.clipboard.writeText(text)
+       props.showAlert('Copied to clipboard','success')
+    }
+
     return (
         <div className="container my-4">
             <h3>{props.heading}</h3>
-            <textarea style={{ backgroundColor: props.mode === 'light' ? 'white' : '#000000', color: props.mode === 'light' ? 'black' : 'white' }} placeholder='Enter Text Here' value={text} onChange={onChangeHandler} className={`form-control`} id="floatingTextarea2" rows="8"></textarea>
+            <textarea style={{color:`${props.mode}`==='dark'?'white':'black'}}  placeholder='Enter Text Here' value={text} onChange={onChangeHandler} className={`form-control bg-${props.mode}`} id="floatingTextarea2" rows="8"></textarea>
             <div className="container">
-                <button disabled = {text.length===0}onClick={onClickUpHandler} className="mx-2 btn btn-primary my-3">ChangeToUpperCase</button>
-                <button disabled = {text.length===0}onClick={onClickLowHandler} className="mx-2 btn btn-primary my-3 ">ChangeToLowerCase</button>
-                <button disabled = {text.length===0}onClick={onClearText} className="mx-2 btn btn-primary my-3 ">ClearText</button>
+                <button style={{color:`${props.mode}`==='dark'?'white':'black'}} disabled = {text.length===0}onClick={onClickUpHandler} className={`mx-2 btn btn-primary my-3 bg-${props.mode} `}>ChangeToUpperCase</button>
+                <button style={{color:`${props.mode}`==='dark'?'white':'black'}} disabled = {text.length===0}onClick={onClickLowHandler} className={`mx-2 btn btn-primary my-3 bg-${props.mode} `}>ChangeToLowerCase</button>
+                <button style={{color:`${props.mode}`==='dark'?'white':'black'}} disabled = {text.length===0}onClick={onClearText} className={`mx-2 btn btn-primary my-3 bg-${props.mode} `}>ClearText</button>
+                <button style={{color:`${props.mode}`==='dark'?'white':'black'}} disabled = {text.length===0}onClick={onCopyText} className={`mx-2 btn btn-primary my-3 bg-${props.mode} `}>CopyText</button>
             </div>
             <div className="container my-3">
                 <h3>Your Text Summary</h3>
-                <p>Your text has {text.split(" ").filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
+                <p>Your text has {text.split(/\s+/).filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
                 <p>{0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length } Minutes take to read</p>
                 <h3>Preview</h3>
                 <p>{text.length > 0 ? text : 'Nothing to preview here'}</p>

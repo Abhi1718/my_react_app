@@ -9,13 +9,21 @@ export default function Alert(props) {
         return lower.charAt(0).toUpperCase() + lower.slice(1);
     }
     return (
-        <div style={{height:'50px'}}>
-         {/* The JSX converts into jsvascript calls so props.alert && the JSX */}
-         { props.alert &&
-            <div className={`alert alert-${props.alert.type}`} role="alert">
-                <strong>{toLowerCase(props.alert.type)}: </strong>{props.alert.msg}.
-            </div>}
-        </div>
-    
+        <>
+            <div style={{ height: '50px' }}>
+                {/* The JSX converts into jsvascript calls so props.alert && the JSX */}
+                {props.alert &&
+                    <div className={`alert alert-${props.alert.type}`} role="alert">
+                        <strong>{toLowerCase(props.alert.type)}: </strong>{props.alert.msg}.
+                    </div>}
+            </div>
+            <div style={{ height: '50px' }}>
+                {/* The JSX converts into jsvascript calls so props.alert && the JSX */}
+                <div className={`alert bg-null text-light`} style={{backgroundColor:'white'}} role="alert">
+                    <strong>Hi : </strong>Abhishek is a good programmer.
+                </div>
+            </div>
+        </>
+
     )
 }

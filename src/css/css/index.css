@@ -10,5 +10,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace; }
 
 .accordion-button::after {
-  filter: invert(1); 
-}
+  filter: invert(1); }
